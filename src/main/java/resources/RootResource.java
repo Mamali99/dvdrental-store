@@ -13,6 +13,6 @@ public class RootResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRoot() {
         // Implementierung der Logik
-        return Response.ok().build();
+        return Response.ok("Root of Store. Returns array of primary resources ").build();
     }
 }
