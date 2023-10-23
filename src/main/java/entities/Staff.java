@@ -2,6 +2,7 @@ package entities;
 /*
  Diese Klasse enthält Informationen über das Personal, das in einem Store arbeitet.
  */
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,6 +33,7 @@ public class Staff {
 
     @ManyToOne
     @JoinColumn(name = "store_id")
+    @JsonbTransient
     private Store store;
 
     @Column(name = "active")

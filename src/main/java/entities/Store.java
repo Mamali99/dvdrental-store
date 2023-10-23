@@ -2,6 +2,7 @@ package entities;
 /*
 Diese Klasse enthält Informationen über den Store, einschließlich des Managers und der Adresse des Stores.
  */
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +19,7 @@ public class Store {
 
     @OneToOne
     @JoinColumn(name = "manager_staff_id")
+    @JsonbTransient
     private Staff manager;
 
 

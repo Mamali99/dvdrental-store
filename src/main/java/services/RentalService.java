@@ -1,9 +1,12 @@
 package services;
 
 import entities.Rental;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-
+@Named
+@Stateless
 public class RentalService {
 
     @PersistenceContext
