@@ -1,12 +1,16 @@
 package resources;
 
 import entities.Rental;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import services.RentalService;
 
 @Path("/rentals")
 public class RentalResource {
+    @Inject
+    RentalService rentalService;
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -19,8 +23,8 @@ public class RentalResource {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRentalById(@PathParam("id") int id) {
-        // Implementierung der Logik
-        return Response.ok().build();
+        Rental rental = rentalService.getRentalById(id);
+        return Response.ok(rental).build();
     }
 
     @PUT

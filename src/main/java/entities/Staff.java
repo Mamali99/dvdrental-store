@@ -1,5 +1,7 @@
 package entities;
-
+/*
+ Diese Klasse enthält Informationen über das Personal, das in einem Store arbeitet.
+ */
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

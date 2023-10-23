@@ -13,9 +13,8 @@ public class InventoryService {
     private EntityManager entityManager;
 
     public List<Inventory> getInventoriesByFilmId(int filmId) {
-        TypedQuery<Inventory> query = entityManager.createQuery("SELECT i FROM Inventory i WHERE i.film_id = :filmId", Inventory.class);
-        query.setParameter("filmId", filmId);
-        return query.getResultList();
+
+        return null;
     }
 
     public Inventory getInventoryById(int id) {
