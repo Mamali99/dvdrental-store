@@ -1,7 +1,6 @@
 package entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,15 +11,39 @@ import java.sql.Timestamp;
 @Entity
 public class Staff {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "staff_staff_id_seq")
+    @SequenceGenerator(name = "staff_staff_id_seq", sequenceName = "public.staff_staff_id_seq", allocationSize = 1)
     private Integer staff_id;
-    private String first_name;
-    private String last_name;
-    private Integer address_id;
+
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+
+    @Column(name = "address_id")
+    private Integer address;
+
+    @Column(name = "email")
     private String email;
-    private Integer store_id;
+
+    @ManyToOne
+    @JoinColumn(name = "store_id")
+    private Store store;
+
+    @Column(name = "active")
     private Boolean active;
+
+    @Column(name = "username")
     private String username;
+
+    @Column(name = "password")
     private String password;
-    private Timestamp last_update;
-    private Byte[] picture;
+
+    @Column(name = "last_update")
+    private Timestamp lastUpdate;
+
+    @Column(name = "picture")
+    private byte[] picture;
 }
