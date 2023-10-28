@@ -1,6 +1,7 @@
 package resources;
 
 import entities.Store;
+import entities.StoreDTO;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -28,7 +29,7 @@ public class StoreResource {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getStoreById(@PathParam("id") int id) {
-        Store store = storeService.getStoreById(id);
+        StoreDTO store = storeService.getStoreById(id);
         return Response.ok(store).build();
     }
 }

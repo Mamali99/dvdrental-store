@@ -31,7 +31,7 @@ public class Staff {
     @Column(name = "email")
     private String email;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
     @JsonbTransient
     private Store store;

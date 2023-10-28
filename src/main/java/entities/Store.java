@@ -17,6 +17,7 @@ public class Store {
     @SequenceGenerator(name = "store_store_id_seq", sequenceName = "public.store_store_id_seq", allocationSize = 1)
     private Integer store_id;
 
+
     @OneToOne
     @JoinColumn(name = "manager_staff_id")
     @JsonbTransient
