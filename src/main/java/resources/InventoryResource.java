@@ -32,7 +32,7 @@ public class InventoryResource {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getInventoryById(@PathParam("id") int id) {
-        Inventory i = inventoryService.getInventoryById(id);
-        return Response.ok(i).build();
+        InventoryDTO dto = inventoryService.getInventoryById(id);
+        return Response.ok(dto).build();
     }
 }

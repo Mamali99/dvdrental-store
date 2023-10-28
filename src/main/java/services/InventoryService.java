@@ -49,7 +49,11 @@ public class InventoryService {
 
 
 
-    public Inventory getInventoryById(int id) {
-        return entityManager.find(Inventory.class, id);
+    public InventoryDTO getInventoryById(int id) {
+        Inventory inventory = entityManager.find(Inventory.class, id);
+        InventoryDTO dto = convertToDTO(inventory);
+
+
+        return dto;
     }
 }
