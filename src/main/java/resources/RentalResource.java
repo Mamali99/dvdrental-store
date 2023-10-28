@@ -1,6 +1,7 @@
 package resources;
 
 import entities.Rental;
+import entities.RentalDTO;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -23,7 +24,7 @@ public class RentalResource {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRentalById(@PathParam("id") int id) {
-        Rental rental = rentalService.getRentalById(id);
+        RentalDTO rental = rentalService.getRentalById(id);
         return Response.ok(rental).build();
     }
 
