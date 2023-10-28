@@ -18,6 +18,7 @@ public class StoreResource {
 
     @GET
     @Path("/count")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getNumberOfStores() {
         Integer count = storeService.getNumberOfStores();
         return Response.ok(count).build();
