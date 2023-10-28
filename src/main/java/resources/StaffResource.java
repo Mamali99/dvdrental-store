@@ -1,6 +1,7 @@
 package resources;
 
 import entities.Staff;
+import entities.StaffDTO;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -20,7 +21,7 @@ public class StaffResource {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getStaffById(@PathParam("id") int id) {
-        Staff staff = staffService.getStaffById(id);
+        StaffDTO staff = staffService.getStaffById(id);
         return Response.ok(staff).build();
     }
 }
