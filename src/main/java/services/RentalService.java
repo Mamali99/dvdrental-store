@@ -26,20 +26,25 @@ public class RentalService {
         if (rental == null) {
             return null;
         }
+        return convertToRentalDTO(rental);
+    }
+
+    public RentalDTO convertToRentalDTO(Rental rental) {
+
+        if (rental == null) {
+            return null;
+        }
 
         RentalDTO dto = new RentalDTO();
         dto.setRentalId(rental.getRental_id());
-        dto.setRentalDate(rental.getRentalDate()); //Format muss noch anpassen
-        dto.setReturnDate(rental.getReturnDate()); //Format muss noch anpassen
-
+        dto.setRentalDate(rental.getRentalDate());
+        dto.setReturnDate(rental.getReturnDate());
 
         CustomerHref customerHref = new CustomerHref();
         customerHref.setHref("http://localhost:8083/customers/" + rental.getCustomer());
         dto.setCustomer(customerHref);
 
         StoreHref storeHref = new StoreHref();
-        // Da die Store-Information nicht direkt in der Rental-Entität vorhanden ist,
-        // nehmen wir an, dass sie über das Inventory-Objekt zugänglich ist.
         storeHref.setHref("http://localhost:8082/stores/" + rental.getInventory().getStore().getStore_id());
         dto.setStore(storeHref);
 
@@ -49,7 +54,6 @@ public class RentalService {
 
         return dto;
     }
-
 
     public void terminateRental(int id) {
         Rental rental = entityManager.find(Rental.class, id);

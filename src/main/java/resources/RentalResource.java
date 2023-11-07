@@ -11,7 +11,7 @@ import services.RentalService;
 @Path("/rentals")
 public class RentalResource {
     @Inject
-    RentalService rentalService;
+    private RentalService rentalService;
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -25,6 +25,9 @@ public class RentalResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRentalById(@PathParam("id") int id) {
         RentalDTO rental = rentalService.getRentalById(id);
+        if(rental == null){
+            return Response.status(Response.Status.NOT_FOUND).entity("Keine rental für Rental-ID gefunden: " + id ).build();
+        }
         return Response.ok(rental).build();
     }
 
