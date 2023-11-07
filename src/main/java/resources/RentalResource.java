@@ -1,7 +1,7 @@
 package resources;
 
 import entities.Rental;
-import entities.RentalDTO;
+import dto.RentalDTO;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;

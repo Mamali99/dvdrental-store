@@ -1,7 +1,6 @@
 package resources;
 
-import entities.Inventory;
-import entities.InventoryDTO;
+import dto.InventoryDTO;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;

@@ -1,7 +1,7 @@
 package services;
 
 import entities.Staff;
-import entities.StaffDTO;
+import dto.StaffDTO;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;

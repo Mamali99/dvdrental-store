@@ -1,10 +1,11 @@
-package entities;
+package utils;
 
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
-public class StoreHref {
+@Getter
+public class FilmHref {
+
     private String href;
 }

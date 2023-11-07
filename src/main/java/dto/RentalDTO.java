@@ -1,11 +1,14 @@
-package entities;
+package dto;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import utils.CustomerHref;
+import utils.FilmHref;
+import utils.StoreHref;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
+
 @JsonPropertyOrder({"rentalId", "rentalDate", "returnDate", "customer", "store", "film"})
 @Getter
 @Setter

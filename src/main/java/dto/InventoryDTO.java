@@ -1,5 +1,7 @@
-package entities;
+package dto;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import utils.FilmHref;
+import utils.StoreHref;
 import lombok.Getter;
 import lombok.Setter;
 

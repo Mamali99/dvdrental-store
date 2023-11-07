@@ -1,10 +1,15 @@
 package services;
 
+import dto.RentalDTO;
 import entities.*;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import utils.CustomerHref;
+import utils.FilmHref;
+import utils.StoreHref;
+
 @Named
 @Stateless
 public class RentalService {

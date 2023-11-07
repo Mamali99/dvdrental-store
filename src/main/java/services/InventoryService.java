@@ -1,14 +1,13 @@
 package services;
 
-import entities.FilmHref;
+import utils.FilmHref;
 import entities.Inventory;
-import entities.InventoryDTO;
-import entities.StoreHref;
+import dto.InventoryDTO;
+import utils.StoreHref;
 import jakarta.ejb.Stateless;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 import java.util.stream.Collectors;
