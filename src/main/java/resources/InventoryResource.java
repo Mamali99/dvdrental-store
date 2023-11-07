@@ -16,7 +16,7 @@ import java.util.List;
 public class InventoryResource {
 
     @Inject
-    InventoryService inventoryService;
+    private InventoryService inventoryService;
 
     @GET
     @Path("/film/{filmId}")

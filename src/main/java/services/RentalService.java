@@ -34,17 +34,17 @@ public class RentalService {
 
 
         CustomerHref customerHref = new CustomerHref();
-        customerHref.setHref("/customers/" + rental.getCustomer());
+        customerHref.setHref("http://localhost:8083/customers/" + rental.getCustomer());
         dto.setCustomer(customerHref);
 
         StoreHref storeHref = new StoreHref();
         // Da die Store-Information nicht direkt in der Rental-Entität vorhanden ist,
         // nehmen wir an, dass sie über das Inventory-Objekt zugänglich ist.
-        storeHref.setHref("/stores/" + rental.getInventory().getStore().getStore_id());
+        storeHref.setHref("http://localhost:8082/stores/" + rental.getInventory().getStore().getStore_id());
         dto.setStore(storeHref);
 
         FilmHref filmHref = new FilmHref();
-        filmHref.setHref("/films/" + rental.getInventory().getFilmId());
+        filmHref.setHref("http://localhost:8081/films/" + rental.getInventory().getFilmId());
         dto.setFilm(filmHref);
 
         return dto;
