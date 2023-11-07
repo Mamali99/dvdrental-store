@@ -8,6 +8,9 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Path("/")
 public class RootResource {
 
@@ -17,7 +20,15 @@ public class RootResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRoot() {
-        // Implementierung der Logik
-        return Response.ok("Root of Store. Returns array of primary resources ").build();
+        String baseUri = uriInfo.getBaseUri().toString();
+
+        Map<String, String> paths = new HashMap<>();
+        paths.put("inventories", baseUri + "inventories");
+        paths.put("rentals", baseUri + "rentals");
+        paths.put("staffs", baseUri + "staffs");
+        paths.put("stores", baseUri + "stores");
+
+
+        return Response.ok(paths).build();
     }
 }
