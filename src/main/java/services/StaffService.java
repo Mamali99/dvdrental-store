@@ -18,8 +18,11 @@ public class StaffService {
 
     public StaffDTO getStaffById(int id) {
         Staff s =  entityManager.find(Staff.class, id);
-        StaffDTO staffDTO = convertToDTO(s);
-        return staffDTO;
+        if(s == null){
+            return null;
+        }
+
+        return convertToDTO(s);
     }
 
     public StaffDTO convertToDTO(Staff staff) {
