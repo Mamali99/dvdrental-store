@@ -14,7 +14,7 @@ import services.StoreService;
 public class StoreResource {
 
     @Inject
-    StoreService storeService;
+    private StoreService storeService;
 
     @GET
     @Path("/count")
@@ -29,6 +29,9 @@ public class StoreResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getStoreById(@PathParam("id") int id) {
         StoreDTO store = storeService.getStoreById(id);
+        if(store == null){
+            return Response.status(Response.Status.NOT_FOUND).entity("Store not found with store-id: " + id).build();
+        }
         return Response.ok(store).build();
     }
 }
