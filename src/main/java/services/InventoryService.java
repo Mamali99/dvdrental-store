@@ -1,5 +1,6 @@
 package services;
 
+import jakarta.ws.rs.NotFoundException;
 import utils.FilmHref;
 import entities.Inventory;
 import dto.InventoryDTO;
@@ -23,6 +24,7 @@ public class InventoryService {
         List<Inventory> inventories = entityManager.createQuery("SELECT i FROM Inventory i WHERE i.filmId = :filmId", Inventory.class)
                 .setParameter("filmId", filmId)
                 .getResultList();
+
         List<InventoryDTO> inventoryDTOs = inventories.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
@@ -35,11 +37,11 @@ public class InventoryService {
         dto.setId(inventory.getInventory_id());
 
         StoreHref storeHref = new StoreHref();
-        storeHref.setHref("/stores/" + inventory.getStore().getStore_id());
+        storeHref.setHref("http://localhost:8082/stores/" + inventory.getStore().getStore_id());
         dto.setStore(storeHref);
 
         FilmHref filmHref = new FilmHref();
-        filmHref.setHref("/films/" + inventory.getFilmId());
+        filmHref.setHref("http://localhost:8081/films/" + inventory.getFilmId());
         dto.setFilm(filmHref);
 
         return dto;
@@ -50,9 +52,9 @@ public class InventoryService {
 
     public InventoryDTO getInventoryById(int id) {
         Inventory inventory = entityManager.find(Inventory.class, id);
-        InventoryDTO dto = convertToDTO(inventory);
-
-
-        return dto;
+        if (inventory == null) {
+            throw new NotFoundException("Inventar mit ID nicht gefunden: " + id);
+        }
+        return convertToDTO(inventory);
     }
 }

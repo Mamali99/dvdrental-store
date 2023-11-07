@@ -24,6 +24,9 @@ public class InventoryResource {
     public Response getInventoriesByFilmId(@PathParam("filmId") int filmId) {
 
         List<InventoryDTO> inventoryList = inventoryService.getInventoriesByFilmId(filmId);
+        if (inventoryList == null || inventoryList.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND).entity("Keine Inventare für Film-ID gefunden: " + filmId).build();
+        }
         return Response.ok(inventoryList).build();
     }
 
@@ -32,6 +35,9 @@ public class InventoryResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getInventoryById(@PathParam("id") int id) {
         InventoryDTO dto = inventoryService.getInventoryById(id);
+        if (dto == null) {
+            return Response.status(Response.Status.NOT_FOUND).entity("Inventar mit ID nicht gefunden: " + id).build();
+        }
         return Response.ok(dto).build();
     }
 }
