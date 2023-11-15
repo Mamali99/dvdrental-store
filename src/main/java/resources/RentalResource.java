@@ -47,7 +47,6 @@ public class RentalResource {
     @PUT
     @Path("/{id}/returned")
     public Response terminateRental(@PathParam("id") int id) {
-        // Implementierung der Logik
-        return Response.ok().build();
+            return rentalService.terminateRental(id);
     }
 }
