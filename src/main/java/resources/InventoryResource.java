@@ -18,6 +18,7 @@ public class InventoryResource {
     @Inject
     private InventoryService inventoryService;
 
+    //Dieser Endpunkt liefert eine Liste von Inventaren, die mit einem bestimmten Film verknüpft sind. Sind Inventare vorhanden, deutet dies darauf hin, dass der Film möglicherweise in Vermietungen verwendet wurde.
     @GET
     @Path("/film/{filmId}")
     @Produces(MediaType.APPLICATION_JSON)

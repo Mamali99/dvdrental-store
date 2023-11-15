@@ -3,12 +3,13 @@ package services;
 import dto.RentalDTO;
 import entities.*;
 import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import utils.CustomerHref;
-import utils.FilmHref;
-import utils.StoreHref;
+import utils.*;
+
+import java.sql.Timestamp;
 
 @Named
 @Stateless
@@ -17,9 +18,70 @@ public class RentalService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void createRental(Rental rental) {
+    @Inject
+    CustomerServiceClient customerServiceClient;
+
+    public RentalDTO createRental(RentalValue rentalValue) {
+
+        Rental rental = new Rental();
+        rental.setRentalDate(rentalValue.getRentalDate());
+        rental.setCustomer(rentalValue.getCustomerId());
+        Inventory inventory = entityManager.find(Inventory.class, rentalValue.getInventoryId());
+        rental.setInventory(inventory);
+        Staff staff = entityManager.find(Staff.class, rentalValue.getStaffId());
+        rental.setStaff(staff);
+        rental.setReturnDate(rentalValue.getReturnDate());
+        rental.setLastUpdate(new Timestamp(System.currentTimeMillis()));
         entityManager.persist(rental);
+        return convertToRentalDTO(rental);
+
     }
+
+    public boolean isValidRentalValue(RentalValue rentalValue) {
+        if (rentalValue == null) {
+            return false;
+        }
+
+        // Überprüfung, ob das Feld 'rentalDate' gesetzt ist
+        if (rentalValue.getRentalDate() == null) {
+            return false;
+        }
+
+        // Überprüfen, ob 'inventoryId' existiert und gültig ist
+        if (rentalValue.getInventoryId() == null || !isValidInventory(rentalValue.getInventoryId())) {
+            return false;
+        }
+
+        // Überprüfen, ob 'customerId' existiert und gültig ist
+        if (rentalValue.getCustomerId() == null || !isValidCustomer(rentalValue.getCustomerId())) {
+            return false;
+        }
+
+        // Überprüfen, ob 'staffId' existiert und gültig ist
+        if (rentalValue.getStaffId() == null || !isValidStaff(rentalValue.getStaffId())) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isValidInventory(Integer inventoryId) {
+        Inventory inventory = entityManager.find(Inventory.class, inventoryId);
+        return inventory != null;
+    }
+
+    private boolean isValidCustomer(Integer customerId) {
+        //hier muss eine Anfrage an Customer-Microservice schicken und kontrollieren, ob diese Customer existiert.
+        return customerServiceClient.checkCustomerExists(customerId);
+    }
+
+    private boolean isValidStaff(Integer staffId) {
+        Staff staff = entityManager.find(Staff.class, staffId);
+        return staff != null;
+    }
+
+
+
 
     public RentalDTO getRentalById(int id) {
         Rental rental = entityManager.find(Rental.class, id);
