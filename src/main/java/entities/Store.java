@@ -4,12 +4,9 @@ Diese Klasse enthält Informationen über den Store, einschließlich des Manager
  */
 import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.sql.Timestamp;
-@Getter
-@Setter
+
 @Entity
 public class Store {
     @Id
@@ -30,5 +27,35 @@ public class Store {
     @Column(name = "last_update")
     private Timestamp lastUpdate;
 
+    public Integer getStore_id() {
+        return store_id;
+    }
 
+    public void setStore_id(Integer store_id) {
+        this.store_id = store_id;
+    }
+
+    public Staff getManager() {
+        return manager;
+    }
+
+    public void setManager(Staff manager) {
+        this.manager = manager;
+    }
+
+    public Integer getAddress() {
+        return address;
+    }
+
+    public void setAddress(Integer address) {
+        this.address = address;
+    }
+
+    public Timestamp getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Timestamp lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
 }

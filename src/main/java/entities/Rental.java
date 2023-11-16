@@ -6,12 +6,10 @@ package entities;
 
 import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+
 
 import java.sql.Timestamp;
-@Getter
-@Setter
+
 @Entity
 public class Rental {
     @Id
@@ -42,4 +40,60 @@ public class Rental {
     @Column(name = "last_update")
     private Timestamp lastUpdate;
 
+
+    public Integer getRental_id() {
+        return rental_id;
+    }
+
+    public void setRental_id(Integer rental_id) {
+        this.rental_id = rental_id;
+    }
+
+    public Timestamp getRentalDate() {
+        return rentalDate;
+    }
+
+    public void setRentalDate(Timestamp rentalDate) {
+        this.rentalDate = rentalDate;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
+    public Integer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Integer customer) {
+        this.customer = customer;
+    }
+
+    public Timestamp getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(Timestamp returnDate) {
+        this.returnDate = returnDate;
+    }
+
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+    }
+
+    public Timestamp getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Timestamp lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
 }

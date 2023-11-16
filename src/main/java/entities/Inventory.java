@@ -6,12 +6,10 @@ Diese Klasse verknüpft Filme mit Stores und gibt an, welche Filme in welchem St
 
 import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+
 
 import java.sql.Timestamp;
-@Getter
-@Setter
+
 @Entity
 public class Inventory {
     @Id
@@ -31,4 +29,35 @@ public class Inventory {
     @Column(name = "last_update")
     private Timestamp lastUpdate;
 
+    public Integer getInventory_id() {
+        return inventory_id;
+    }
+
+    public void setInventory_id(Integer inventory_id) {
+        this.inventory_id = inventory_id;
+    }
+
+    public Integer getFilmId() {
+        return filmId;
+    }
+
+    public void setFilmId(Integer filmId) {
+        this.filmId = filmId;
+    }
+
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
+
+    public Timestamp getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Timestamp lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
 }
