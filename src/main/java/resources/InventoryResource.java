@@ -18,7 +18,6 @@ public class InventoryResource {
     @Inject
     private InventoryService inventoryService;
 
-    //Dieser Endpunkt liefert eine Liste von Inventaren, die mit einem bestimmten Film verknüpft sind. Sind Inventare vorhanden, deutet dies darauf hin, dass der Film möglicherweise in Vermietungen verwendet wurde.
     @GET
     @Path("/film/{filmId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -26,7 +25,7 @@ public class InventoryResource {
 
         List<InventoryDTO> inventoryList = inventoryService.getInventoriesByFilmId(filmId);
         if (inventoryList == null || inventoryList.isEmpty()) {
-            return Response.status(Response.Status.NOT_FOUND).entity("Keine Inventare für Film-ID gefunden: " + filmId).build();
+            return Response.status(Response.Status.NOT_FOUND).entity("No inventories found for film ID: " + filmId).build();
         }
         return Response.ok(inventoryList).build();
     }
@@ -37,7 +36,7 @@ public class InventoryResource {
     public Response getInventoryById(@PathParam("id") int id) {
         InventoryDTO dto = inventoryService.getInventoryById(id);
         if (dto == null) {
-            return Response.status(Response.Status.NOT_FOUND).entity("Inventar mit ID nicht gefunden: " + id).build();
+            return Response.status(Response.Status.NOT_FOUND).entity("Inventory with ID not found: " + id).build();
         }
         return Response.ok(dto).build();
     }

@@ -53,7 +53,7 @@ public class InventoryService {
     public InventoryDTO getInventoryById(int id) {
         Inventory inventory = entityManager.find(Inventory.class, id);
         if (inventory == null) {
-            throw new NotFoundException("Inventar mit ID nicht gefunden: " + id);
+            throw new NotFoundException("Inventory with ID not found: " + id);
         }
         return convertToDTO(inventory);
     }

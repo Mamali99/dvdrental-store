@@ -1,6 +1,6 @@
 package resources;
 
-import entities.Rental;
+
 import dto.RentalDTO;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -18,17 +18,15 @@ public class RentalResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createRental(RentalValue rentalValue) {
-        // Validierung der Eingabedaten und Überprüfung der Existenz der referenzierten Entitäten
         if (!rentalService.isValidRentalValue(rentalValue)) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("Ungültige Eingabedaten").build();
+            return Response.status(Response.Status.BAD_REQUEST).entity("Invalid input data.").build();
         }
 
         try {
             RentalDTO rentalDTO = rentalService.createRental(rentalValue);
-            // Speichern der Vermietung in der Datenbank
             return Response.status(Response.Status.CREATED).entity(rentalDTO).build();
         } catch (Exception e) {
-            return Response.serverError().entity("Fehler bei der Erstellung der Vermietung").build();
+            return Response.serverError().entity("Error in creating the rental.").build();
         }
 
     }
@@ -39,7 +37,7 @@ public class RentalResource {
     public Response getRentalById(@PathParam("id") int id) {
         RentalDTO rental = rentalService.getRentalById(id);
         if(rental == null){
-            return Response.status(Response.Status.NOT_FOUND).entity("Keine rental für Rental-ID gefunden: " + id ).build();
+            return Response.status(Response.Status.NOT_FOUND).entity("No rental found for Rental-ID: " + id ).build();
         }
         return Response.ok(rental).build();
     }

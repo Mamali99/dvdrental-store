@@ -4,10 +4,7 @@ package entities;
  Diese Klasse verknüpft Kunden mit den Filmen, die sie ausgeliehen haben, und gibt an, welche Filme von welchem Kunden ausgeliehen wurden.
  */
 
-import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
-
-
 import java.sql.Timestamp;
 
 @Entity
@@ -22,7 +19,6 @@ public class Rental {
 
     @ManyToOne
     @JoinColumn(name = "inventory_id")
-    @JsonbTransient
     private Inventory inventory;
 
 
@@ -34,7 +30,6 @@ public class Rental {
 
     @ManyToOne
     @JoinColumn(name = "staff_id")
-    @JsonbTransient
     private Staff staff;
 
     @Column(name = "last_update")

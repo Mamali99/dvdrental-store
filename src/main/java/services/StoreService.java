@@ -30,10 +30,10 @@ public class StoreService {
 
 
         StoreDTO storeDTO = new StoreDTO();
-        storeDTO.setStore_id(store.getStore_id());
-        storeDTO.setManager_staff_id(store.getManager() != null ? store.getManager().getStaff_id() : null);
-        storeDTO.setAddress_id(store.getAddress());
-        storeDTO.setLast_update(store.getLastUpdate());
+        storeDTO.setStoreId(store.getStore_id());
+        storeDTO.setManagerStaffId(store.getManager() != null ? store.getManager().getStaff_id() : null);
+        storeDTO.setAddressId(store.getAddress());
+        storeDTO.setLastUpdate(store.getLastUpdate());
 
 
         return storeDTO;

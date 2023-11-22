@@ -7,7 +7,6 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
 import utils.*;
 
@@ -44,14 +43,6 @@ public class RentalService {
             return false;
         }
 
-        // Überprüfung, ob das Feld 'rentalDate' gesetzt ist
-        //Hier kann ich weg machen, weil es kann auch sein, dass kein return Datum hat.
-        /*
-        if (rentalValue.getRentalDate() == null) {
-            return false;
-        }
-
-         */
 
         // Überprüfen, ob 'inventoryId' existiert und gültig ist
         if (rentalValue.getInventoryId() == null || !isValidInventory(rentalValue.getInventoryId())) {
@@ -77,7 +68,6 @@ public class RentalService {
     }
 
     private boolean isValidCustomer(Integer customerId) {
-        //hier muss eine Anfrage an Customer-Microservice schicken und kontrollieren, ob diese Customer existiert.
         return customerServiceClient.checkCustomerExists(customerId);
     }
 
@@ -128,17 +118,17 @@ public class RentalService {
 
         if (rental == null) {
             return Response.status(Response.Status.NOT_FOUND)
-                    .entity("Vermietung mit ID " + id + " nicht gefunden.").build();
+                    .entity("Rental with ID " + id + " not found.").build();
         }
 
         if (rental.getReturnDate() != null) {
             return Response.status(422) // Unprocessable Entity
-                    .entity("Vermietung bereits beendet.").build();
+                    .entity("Rental already terminated.").build();
         }
 
         rental.setReturnDate(new Timestamp(System.currentTimeMillis()));
         entityManager.merge(rental);
 
-        return Response.ok().entity("Vermietung erfolgreich beendet.").build();
+        return Response.ok().entity("Rental successfully terminated.").build();
     }
 }

@@ -1,10 +1,9 @@
 package dto;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import utils.FilmHref;
 import utils.StoreHref;
 
 
-@JsonPropertyOrder({"id", "store", "film"})
+
 public class InventoryDTO {
 
     private Integer id;

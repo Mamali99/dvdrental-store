@@ -4,7 +4,6 @@ package entities;
 Diese Klasse verknüpft Filme mit Stores und gibt an, welche Filme in welchem Store verfügbar sind.
  */
 
-import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 
 
@@ -21,7 +20,7 @@ public class Inventory {
     private Integer filmId;
 
 
-    @JsonbTransient
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "store_id")
     private Store store;

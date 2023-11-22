@@ -2,9 +2,8 @@ package entities;
 /*
 Diese Klasse enthält Informationen über den Store, einschließlich des Managers und der Adresse des Stores.
  */
-import jakarta.json.bind.annotation.JsonbTransient;
-import jakarta.persistence.*;
 
+import jakarta.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
@@ -17,7 +16,6 @@ public class Store {
 
     @OneToOne
     @JoinColumn(name = "manager_staff_id")
-    @JsonbTransient
     private Staff manager;
 
 

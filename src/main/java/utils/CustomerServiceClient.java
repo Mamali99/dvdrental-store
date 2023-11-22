@@ -20,12 +20,9 @@ public class CustomerServiceClient {
     public boolean checkCustomerExists(int customerId) {
         WebTarget target = client.target(CUSTOMER_SERVICE_URL + customerId);
 
-        // Ausgabe der angeforderten URL
-        System.out.println("Angeforderte URL: " + target.getUri().toString());
-
         Response response = target.request(MediaType.APPLICATION_JSON).get();
         boolean exists = response.getStatus() == Response.Status.OK.getStatusCode();
-        response.close(); // Schließen der Response, um Ressourcen freizugeben
+        response.close();
         return exists;
     }
 }
