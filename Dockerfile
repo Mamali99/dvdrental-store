@@ -1,5 +1,5 @@
 # Verwenden des Eclipse Temurin JRE-Images als Basis
-FROM eclipse-temurin:20-jre
+FROM docker.io/library/eclipse-temurin:20-jre
 
 # Setzen Sie das Arbeitsverzeichnis im Container
 WORKDIR /usr/store-app
@@ -9,7 +9,7 @@ ENV POSTGRESQL_USER=postgres
 ENV POSTGRESQL_PASSWORD=store
 
 # Kopieren des Bootable JAR-Files in den Docker-Container
-COPY ./target/ROOT-bootable.jar /usr/store-app/store-app-bootable.jar
+COPY ./target/store-app-bootable.jar /usr/store-app/store-app-bootable.jar
 
 # Expose Port 8082 für den Container
 EXPOSE 8082
