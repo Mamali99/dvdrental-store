@@ -4,9 +4,12 @@ FROM docker.io/library/eclipse-temurin:20-jre
 # Setzen Sie das Arbeitsverzeichnis im Container
 WORKDIR /usr/store-app
 
-# Setzen von Umgebungsvariablen für die Datenbankverbindung
-ENV POSTGRESQL_USER=postgres
-ENV POSTGRESQL_PASSWORD=trust
+# Standardwerte für Umgebungsvariablen festlegen
+ENV POSTGRES_HOST=localhost
+ENV POSTGRES_PORT=54322
+ENV POSTGRES_DB=dvdrentalstore
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=trust
 
 # Kopieren des Bootable JAR-Files in den Docker-Container
 COPY ./target/dvdrental-store-bootable.jar /usr/store-app/dvdrental-store-bootable.jar
@@ -15,4 +18,13 @@ COPY ./target/dvdrental-store-bootable.jar /usr/store-app/dvdrental-store-bootab
 EXPOSE 8082
 
 # Setzen der WildFly-Konfiguration, um auf alle Netzwerkschnittstellen zu hören und Port 8082 zu verwenden
-CMD java -Djboss.bind.address=0.0.0.0 -Djboss.bind.address.management=0.0.0.0 -Djboss.http.port=8082 -Djboss.management.http.port=9992 -jar /usr/store-app/dvdrental-store-bootable.jar -Dpostgresql.user=${POSTGRESQL_USER} -Dpostgresql.password=${POSTGRESQL_PASSWORD}
+CMD java -Djboss.http.port=8082 \
+     -Djboss.bind.address=0.0.0.0 \
+     -Djboss.bind.address.management=0.0.0.0 \
+     -Djboss.management.http.port=9992 \
+     -Dpostgresql.host=${POSTGRES_HOST} \
+     -Dpostgresql.port=${POSTGRES_PORT} \
+     -Dpostgresql.database=${POSTGRES_DB} \
+     -Dpostgresql.user=${POSTGRES_USER} \
+     -Dpostgresql.password=${POSTGRES_PASSWORD} \
+     -jar /usr/store-app/dvdrental-store-bootable.jar
