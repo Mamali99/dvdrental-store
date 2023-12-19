@@ -30,8 +30,10 @@ public class RentalService {
         rental.setCustomer(rentalValue.getCustomerId());
         Inventory inventory = entityManager.find(Inventory.class, rentalValue.getInventoryId());
         rental.setInventory(inventory);
+        System.out.println("\n\n"+rental.getInventory() + "wurde gefunden\n\n");
         Staff staff = entityManager.find(Staff.class, rentalValue.getStaffId());
         rental.setStaff(staff);
+        System.out.println("\n\n"+rental.getStaff() + "wurde gefunden\n\n");
         rental.setReturnDate(rentalValue.getReturnDate());
         rental.setLastUpdate(new Timestamp(System.currentTimeMillis()));
         entityManager.persist(rental);
@@ -70,6 +72,7 @@ public class RentalService {
 
     private boolean isValidCustomer(Integer customerId) {
         return customerServiceClient.checkCustomerExists(customerId);
+
     }
 
     private boolean isValidStaff(Integer staffId) {
