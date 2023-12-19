@@ -7,6 +7,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
 import utils.*;
 
@@ -113,6 +114,7 @@ public class RentalService {
         return dto;
     }
 
+    @Transactional
     public Response terminateRental(int id) {
         Rental rental = entityManager.find(Rental.class, id);
 
