@@ -21,8 +21,7 @@ public class CustomerServiceClient {
         WebTarget target = client.target(CUSTOMER_SERVICE_URL + customerId);
 
         Response response = target.request(MediaType.APPLICATION_JSON).get();
-        boolean exists = response.getStatus() == Response.Status.OK.getStatusCode();
-        response.close();
-        return exists;
+
+        return response.getStatus() == Response.Status.OK.getStatusCode();
     }
 }

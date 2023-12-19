@@ -24,6 +24,7 @@ public class RentalResource {
 
         try {
             RentalDTO rentalDTO = rentalService.createRental(rentalValue);
+
             return Response.status(Response.Status.CREATED).entity(rentalDTO).build();
         } catch (Exception e) {
             return Response.serverError().entity("Error in creating the rental.").build();

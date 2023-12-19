@@ -23,17 +23,20 @@ public class RentalService {
     @Inject
     CustomerServiceClient customerServiceClient;
 
+    @Transactional
     public RentalDTO createRental(RentalValue rentalValue) {
+
 
         Rental rental = new Rental();
         rental.setRentalDate(rentalValue.getRentalDate());
         rental.setCustomer(rentalValue.getCustomerId());
+
         Inventory inventory = entityManager.find(Inventory.class, rentalValue.getInventoryId());
         rental.setInventory(inventory);
-        System.out.println("\n\n"+rental.getInventory() + "wurde gefunden\n\n");
+
         Staff staff = entityManager.find(Staff.class, rentalValue.getStaffId());
         rental.setStaff(staff);
-        System.out.println("\n\n"+rental.getStaff() + "wurde gefunden\n\n");
+
         rental.setReturnDate(rentalValue.getReturnDate());
         rental.setLastUpdate(new Timestamp(System.currentTimeMillis()));
         entityManager.persist(rental);
@@ -49,16 +52,19 @@ public class RentalService {
 
         // Überprüfen, ob 'inventoryId' existiert und gültig ist
         if (rentalValue.getInventoryId() == null || !isValidInventory(rentalValue.getInventoryId())) {
+
             return false;
         }
 
         // Überprüfen, ob 'customerId' existiert und gültig ist
         if (rentalValue.getCustomerId() == null || !isValidCustomer(rentalValue.getCustomerId())) {
+
             return false;
         }
 
         // Überprüfen, ob 'staffId' existiert und gültig ist
         if (rentalValue.getStaffId() == null || !isValidStaff(rentalValue.getStaffId())) {
+
             return false;
         }
 
@@ -100,7 +106,7 @@ public class RentalService {
         RentalDTO dto = new RentalDTO();
         dto.setRentalId(rental.getRental_id());
         dto.setRentalDate(rental.getRentalDate());
-        dto.setReturnDate(rental.getReturnDate());
+        //dto.setReturnDate(rental.getReturnDate());
 
         CustomerHref customerHref = new CustomerHref();
         customerHref.setHref("http://localhost:8083/customers/" + rental.getCustomer());
